@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const TablaNoticias = ({noticias}) => {
+    const [buscar, setBuscar ] = useState('')
+    const buscador = (e) =>{
+        setBuscar(e.target.value)
+        
+    }
+    const resultados= noticias.filter(
+        (r)=>r.title.toLowerCase().includes(buscar.toLowerCase())
+    )
   return (
     <>
+    <div className='row-2'>
+        <h1>Noticias</h1>
+    </div>
+    <div className='row-md-2'>
+        <input 
+        type="text" 
+        placeholder='Buscar' 
+        className='form-control' 
+        onChange={buscador}
+        value={buscar}/>
+    </div>
     <table className='table table-borderer'>
                 <thead>
                     <tr>
@@ -13,7 +32,7 @@ const TablaNoticias = ({noticias}) => {
                 </thead>
                 <tbody>
                         {
-                        noticias.map(n=>(
+                        resultados.map(n=>(
                             <tr key={n.id}>
                                 <td>{n.title}</td>
                                 <td>{n.date}</td>
