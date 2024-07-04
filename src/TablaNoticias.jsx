@@ -15,7 +15,7 @@ const TablaNoticias = ({noticias}) => {
         const index = e.target.parentElement.parentElement.id
         const articulo = e.target.parentElement.parentElement.children[0].innerText;
         const aux = notis.filter(
-            (r)=> r.title != articulo)
+            (r)=> r.title !== articulo)
         console.log(aux)
         aux.forEach((e,x) => {
             e.id = x+1
