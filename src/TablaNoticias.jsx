@@ -9,6 +9,21 @@ const TablaNoticias = ({noticias}) => {
     const resultados= noticias.filter(
         (r)=>r.title.toLowerCase().includes(buscar.toLowerCase())
     )
+
+    const onClickEliminar = (e) => {
+        const notis = JSON.parse(localStorage.getItem('noticias'))
+        const index = e.target.parentElement.parentElement.id
+        const articulo = e.target.parentElement.parentElement.children[0].innerText;
+        const aux = notis.filter(
+            (r)=> r.title != articulo)
+        console.log(aux)
+        aux.forEach((e,x) => {
+            e.id = x+1
+        });
+        localStorage.setItem("noticias",JSON.stringify(aux));
+        document.getElementById(index).remove()
+    }
+
   return (
     <>
     <div className='row-2'>
@@ -33,10 +48,10 @@ const TablaNoticias = ({noticias}) => {
                 <tbody>
                         {
                         resultados.map(n=>(
-                            <tr key={n.id}>
+                            <tr key={n.id} id={n.id}>
                                 <td>{n.title}</td>
                                 <td>{n.date}</td>
-                                <td><button className='btn btn-danger'>eliminar</button></td>
+                                <td><button className='btn btn-danger' onClick={onClickEliminar}>eliminar</button></td>
                             </tr>
                         ))
                         }

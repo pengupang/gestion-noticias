@@ -11,6 +11,7 @@ const Inicio = () => {
       localStorage.setItem("noticias", JSON.stringify(response.data));
       setNoticias(JSON.parse(localStorage.getItem("noticias")));
     });
+    console.log("recarga")
   }, []);
 
   return (
