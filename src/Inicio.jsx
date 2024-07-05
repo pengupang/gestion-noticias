@@ -18,15 +18,6 @@ const Inicio = () => {
     console.log("recarga")
   }, []);
 
-  const onChangeTitulo = (event) => {
-    setTitulo(event.target.value)
-  }
-  
-  const onChangeFecha= (event) => {
-    setFecha(event.target.value)
-  }
-
-
 
   const onClickGuardar = () => {
     /*
@@ -62,8 +53,8 @@ const Inicio = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="fecha" className="form-label">Fecha</label>
-            <input type="text" className="form-control" id="fecha"
-                  value={fecha} onChange={(e) => setFecha(e.target.value)}/>
+            <input type="date" className="form-control" id="fecha" 
+            value={fecha} onChange={(e) => setFecha(e.target.value)}/>
           </div>
           <button className="btn btn-info" onClick={onClickGuardar}>Guardar</button>
         </div>
