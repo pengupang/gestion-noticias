@@ -1,29 +1,22 @@
 import React, { useState } from 'react'
 
-const TablaNoticias = ({noticias}) => {
+const TablaNoticias = ()=> {
+    const [noticias, setNoticias] = useState(JSON.parse(localStorage.getItem("noticias")));
     const [buscar, setBuscar ] = useState('')
+
     const buscador = (e) =>{
         setBuscar(e.target.value)
-        
     }
-    const resultados= noticias.filter(
-        (r)=>r.title.toLowerCase().includes(buscar.toLowerCase())
-    )
 
     const onClickEliminar = (e) => {
-        const notis = JSON.parse(localStorage.getItem('noticias'))
-        const index = e.target.parentElement.parentElement.id
-        const articulo = e.target.parentElement.parentElement.children[0].innerText;
-        const aux = notis.filter(
-            (r)=> r.title !== articulo)
-        console.log(aux)
-        aux.forEach((e,x) => {
-            e.id = x+1
-        });
-        localStorage.setItem("noticias",JSON.stringify(aux));
-        document.getElementById(index).remove()
+        const index = e.target.parentElement.parentElement.id;
+        console.log(index)
+        const aux = noticias.filter(
+            noti => noti.id != index
+        )
+        localStorage.setItem('noticias',JSON.stringify(aux))
+        setNoticias(JSON.parse(localStorage.getItem("noticias")))
     }
-
   return (
     <>
     <div className='row-2'>
@@ -47,7 +40,13 @@ const TablaNoticias = ({noticias}) => {
                 </thead>
                 <tbody>
                         {
-                        resultados.map(n=>(
+                        noticias.filter(noti => {
+                            if (buscar === ''){
+                                return noti;
+                            }else if (noti.title.toLowerCase().includes(buscar.toLowerCase())){
+                                return noti;
+                            }
+                        }).map(n=>(
                             <tr key={n.id} id={n.id}>
                                 <td>{n.title}</td>
                                 <td>{n.date}</td>
