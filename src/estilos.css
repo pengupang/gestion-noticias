@@ -1,0 +1,30 @@
+nav{
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: gray;
+    margin-bottom: 10px;
+    position: sticky;
+    top: 0;
+}
+
+li{
+    list-style: none;
+    display: inline-block;
+    margin:0px 15px 0px 15px;
+    
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    padding: 13px;
+    border-radius: 1px;
+}
+
+a:hover{
+    color: white;
+    background-color: rgb(97, 96, 96);
+    transition: 0.3s;
+}
