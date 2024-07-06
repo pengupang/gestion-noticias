@@ -10,12 +10,25 @@ const Ingresar = () => {
   const [fecha,setFecha] = useState('');
 
   useEffect(() => {
-    axios.get(url).then(response => {
-      localStorage.setItem("noticias", JSON.stringify(response.data));
-      setIdnoticias((response.data[response.data.length-1].id)+1)
-      setNoticias(JSON.parse(localStorage.getItem("noticias")));
-    });
-    console.log("recarga")
+    const cargarNoticias = async () => {
+      try {
+        const noticiasGuardadas = JSON.parse(localStorage.getItem('noticias'));
+        if (!noticiasGuardadas) {
+          axios.get(url).then(response => {
+            localStorage.setItem("noticias", JSON.stringify(response.data));
+            setIdnoticias((response.data.length > 0 ? response.data[response.data.length - 1].id + 1 : 0));
+            setNoticias(response.data);
+          });
+        } else {
+          setIdnoticias((noticiasGuardadas.length > 0 ? noticiasGuardadas[noticiasGuardadas.length - 1].id + 1 : 0));
+          setNoticias(noticiasGuardadas)
+        }
+      } catch (error) {
+        console.error('Error al cargar noticias:', error);
+      }
+    };
+
+    cargarNoticias();
   }, []);
   
 
