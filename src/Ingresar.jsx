@@ -17,7 +17,7 @@ const Ingresar = () => {
     });
     console.log("recarga")
   }, []);
-
+  
 
   const onClickGuardar = () => {
     /*
@@ -35,11 +35,13 @@ const Ingresar = () => {
     localStorage.setItem("noticias", JSON.stringify(noti))
     setNoticias(JSON.parse(localStorage.getItem("noticias")));
     */
-    setIdnoticias(idnoticias+1);
-    console.log(idnoticias);
-    const aux = {id: idnoticias, title:titulo, date:fecha}
-    setNoticias([...noticias, aux])
-    localStorage.setItem('noticias',JSON.stringify(noticias))
+    const aux = { id: idnoticias, title: titulo, date: fecha };
+    const nuevasNoticias = [...noticias, aux];
+    setNoticias(nuevasNoticias);
+    localStorage.setItem('noticias', JSON.stringify(nuevasNoticias));
+    setIdnoticias(idnoticias + 1);
+    setTitulo("")
+    setFecha("")
   }
 
   return (
@@ -61,7 +63,7 @@ const Ingresar = () => {
           <button className="btn btn-info" onClick={onClickGuardar}>Guardar</button>
         </div>
         <div className="col-md-6">
-          <TablaNoticias accion={'eliminar'}/>
+          <TablaNoticias accion={'eliminar'} listaNoticias={JSON.parse(localStorage.getItem("noticias")) || []} />
         </div>
       </div>
     </div>

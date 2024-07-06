@@ -19,14 +19,15 @@ const Editar = () => {
     setBotonEstado(false);
   }
 
+    
   const onClickGuardar = () => {
     console.log(idEditar);
     console.log(tituloEditar);
     console.log(fechaEditar);
-    if (tituloEditar != ""){
+    if (tituloEditar !== ""){
       const aux = JSON.parse(localStorage.getItem("noticias"));
       const nuevo = aux.map((r) => {
-        if (r.id == idEditar){
+        if (r.id === idEditar){
           return {id: Number(idEditar), title: tituloEditar, date: fechaEditar}
         }
         return r
@@ -63,7 +64,7 @@ const Editar = () => {
                 disabled={botonEstado}>Guardar</button>
       </div>
       <div className="col-md-6">
-        <TablaNoticias setEditar={setEditar} accion={"editar"}/>
+        <TablaNoticias setEditar={setEditar} accion={"editar"} listaNoticias={JSON.parse(localStorage.getItem("noticias")) || []}/>
       </div>
     </div>
   </div></div>
