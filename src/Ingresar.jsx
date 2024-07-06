@@ -61,7 +61,7 @@ const Ingresar = () => {
           <button className="btn btn-info" onClick={onClickGuardar}>Guardar</button>
         </div>
         <div className="col-md-6">
-          <TablaNoticias noticias={noticias}/>
+          <TablaNoticias accion={'eliminar'}/>
         </div>
       </div>
     </div>

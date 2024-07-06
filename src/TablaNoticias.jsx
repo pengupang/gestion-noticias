@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const TablaNoticias = ()=> {
+const TablaNoticias = ({setEditar,accion})=> {
     const storedNoticias = localStorage.getItem('noticias');
     const initialNoticias = storedNoticias ? JSON.parse(storedNoticias) : [];
     const [noticias, setNoticias] = useState(initialNoticias);
@@ -16,11 +16,27 @@ const TablaNoticias = ()=> {
         const index = e.target.parentElement.parentElement.id;
         console.log(index)
         const aux = noticias.filter(
-            noti => noti.id !== index
+            noti => noti.id != index
         )
         localStorage.setItem('noticias',JSON.stringify(aux))
         setNoticias(JSON.parse(localStorage.getItem("noticias")))
     }
+
+    const onClickEditar = (e) => {
+        console.log(accion);
+        const index = e.target.parentElement.parentElement.id;
+        const aux = noticias.filter(
+            noti => noti.id == index
+        );
+        setEditar(index,aux[0].title,aux[0].date)
+        setNoticias(JSON.parse(localStorage.getItem("noticias")))
+    }
+
+    const FuncionAccion = (event) => {
+        if (accion == 'eliminar'){return onClickEliminar(event)}
+        if (accion == 'editar'){return onClickEditar(event)}
+    }
+
     const fDesde = (e) => {
         setDesde(e.target.value)
         console.log(e.target.value)
@@ -81,11 +97,20 @@ const TablaNoticias = ()=> {
                 </thead>
                 <tbody>
                         {
+                        //noticias.filter(
+                        //    r=> filtroTitulo(r) && filtroFecha(r)
+                        //).map(n=>(
+                        //    <tr key={n.id} id={n.id}>
+                        //        <td>{n.title}</td>
+                        //        <td>{n.date}</td>
+                        //        <td><button className='btn btn-danger' onClick={FuncionAccion}>{accion}</button></td>                            
+                        //    </tr>
+                        //))
                         resultados.map(n=>(
                             <tr key={n.id} id={n.id}>
                                 <td>{n.title}</td>
                                 <td>{n.date}</td>
-                                <td><button className='btn btn-danger' onClick={onClickEliminar}>eliminar</button></td>
+                                <td><button className='btn btn-danger' onClick={FuncionAccion}>{accion}</button></td>
                             </tr>
                         ))
                         }
