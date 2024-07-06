@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const TablaNoticias = ({ setEditar, accion, listaNoticias }) => {
+const TablaNoticias = ({ setEditar, accion, listaNoticias, setNoticias1 }) => {
   const [noticias, setNoticias] = useState([]);
   const [buscar, setBuscar] = useState('');
   const [desde, setDesde] = useState('');
@@ -17,16 +17,17 @@ const TablaNoticias = ({ setEditar, accion, listaNoticias }) => {
   const onClickEliminar = (e) => {
     const index = e.target.parentElement.parentElement.id;
     const aux = noticias.filter(
-      noti => noti.id !== index
+      noti => noti.id != index
     );
     localStorage.setItem('noticias', JSON.stringify(aux));
     setNoticias(JSON.parse(localStorage.getItem("noticias")));
+    setNoticias1(JSON.parse(localStorage.getItem("noticias")));
   }
 
   const onClickEditar = (e) => {
     const index = parseInt(e.target.parentElement.parentElement.id, 10);
     const aux = noticias.filter(
-      noti => noti.id === index
+      noti => noti.id == index
     );
     if (aux.length > 0) {
       setEditar(index, aux[0].title, aux[0].date);

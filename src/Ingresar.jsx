@@ -76,7 +76,7 @@ const Ingresar = () => {
           <button className="btn btn-info" onClick={onClickGuardar}>Guardar</button>
         </div>
         <div className="col-md-6">
-          <TablaNoticias accion={'eliminar'} listaNoticias={JSON.parse(localStorage.getItem("noticias")) || []} />
+          <TablaNoticias accion={'eliminar'} listaNoticias={JSON.parse(localStorage.getItem("noticias")) || []} setNoticias1={setNoticias} />
         </div>
       </div>
     </div>
