@@ -48,13 +48,17 @@ const Ingresar = () => {
     localStorage.setItem("noticias", JSON.stringify(noti))
     setNoticias(JSON.parse(localStorage.getItem("noticias")));
     */
-    const aux = { id: idnoticias, title: titulo, date: fecha };
-    const nuevasNoticias = [...noticias, aux];
-    setNoticias(nuevasNoticias);
-    localStorage.setItem('noticias', JSON.stringify(nuevasNoticias));
-    setIdnoticias(idnoticias + 1);
-    setTitulo("")
-    setFecha("")
+    if (fecha != "" && titulo != ""){
+      const aux = { id: idnoticias, title: titulo, date: fecha };
+      const nuevasNoticias = [...noticias, aux];
+      setNoticias(nuevasNoticias);
+      localStorage.setItem('noticias', JSON.stringify(nuevasNoticias));
+      setIdnoticias(idnoticias + 1);
+      setTitulo("")
+      setFecha("")
+    }else{
+      alert("los datos a ingresar no son erroneos o estan vacios, modifiquelos a unos validos.")
+    }
   }
 
   return (
